@@ -16,10 +16,10 @@ return [
     /*
      * 账号基本信息，请从微信公众平台/开放平台获取
      */
-    'app_id'  => env('WECHAT_APPID', 'wx293aa4dd9dfc5071'),         // AppID  wx092d9275d88d43c8
-    'secret'  => env('WECHAT_SECRET', 'a0e80cad8303a18ca70a79cc2cf5af36'),     // AppSecret // 2182593778338bf2f4681b63ee6ee78d
+    'app_id'  => env('WECHAT_APPID', 'wx0573aa134642be19'),         // AppID  wx293aa4dd9dfc5071
+    'secret'  => env('WECHAT_SECRET', '0cb89f933e947d34d4961f9dd06c8085'),     // AppSecret //  a0e80cad8303a18ca70a79cc2cf5af36
     'token'   => env('WECHAT_TOKEN', 'emoji'),          // Token
-    'aes_key' => env('WECHAT_AES_KEY', 'ha3Id0AbL3bVOxa5U6cj0TfBrlDh5Uciwbe9F0lfZPP'),// //PsDBF4yFh0M8CEnd31F0PHW0pWETalnlXmzFsxVOCNr                    // EncodingAESKey
+    'aes_key' => env('WECHAT_AES_KEY', 'qsY7FGgnsmsaWn5hYF9tum7dsBpdefx4AgR3IG41Qsp'),// //PsDBF4yFh0M8CEnd31F0PHW0pWETalnlXmzFsxVOCNr  ha3Id0AbL3bVOxa5U6cj0TfBrlDh5Uciwbe9F0lfZPP
 
     /*
      * 日志配置

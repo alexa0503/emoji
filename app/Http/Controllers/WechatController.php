@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Helper;
 use Carbon\Carbon;
 use Log;
+use EasyWeChat\Message\Voice;
+use EasyWeChat\Message\News;
+use EasyWeChat\Message\Text;
+use EasyWeChat\Message\Material;
 
 class WechatController extends Controller
 {
@@ -13,8 +17,10 @@ class WechatController extends Controller
     {
         Log::info('request arrived.');
         $server = \EasyWeChat::server();
+
         $server->setMessageHandler(function ($message) {
             if ($message->MsgType == 'text') {
+                return new Voice(['media_id'=>'PxJNYBNlHPMGLoVfG9ZGgudqxs0AawGKaUknf9SvSkQ']);
                 # code...
                 switch ($message->Content) {
                     case '/::)':
@@ -92,6 +98,37 @@ class WechatController extends Controller
         Log::info('return response.');
 
         return $server->serve();
+    }
+    public function upload()
+    {
+        $material = \EasyWeChat::material();
+        $lists = $material->lists('voice', 0, 10);
+        //$voice = new Voice(['media_id' => 'cZ31wNENt1bdiVf9ESuIUx7f4AtqdrO5hfrhoZ1VKvc']);
+
+        var_dump($lists);
+        return ;
+        $voices = [
+            ['path'=>public_path('voice/happy.mp3'),'title'=>'happy'],
+            ['path'=>public_path('voice/sad.mp3'),'title'=>'sad'],
+            ['path'=>public_path('voice/cute.mp3'),'title'=>'cute'],
+            ['path'=>public_path('voice/angry.mp3'),'title'=>'angry'],
+            ['path'=>public_path('voice/quiet.mp3'),'title'=>'quiet'],
+            ['path'=>public_path('voice/surprise.mp3'),'title'=>'surprise'],
+            ['path'=>public_path('voice/others.mp3'),'title'=>'others'],
+        ];
+        $material = \EasyWeChat::material();
+
+        foreach( $voices as $v){
+            $result = $material->uploadVoice($v['path']);
+            $mediaId = $result->media_id;
+            $voice = new \App\Voice();
+            $voice->media_id = $mediaId;
+            $voice->title = $v['title'];
+            $voice->save();
+        }
+
+        return;
+
     }
     public function auth(Request $request)
     {
