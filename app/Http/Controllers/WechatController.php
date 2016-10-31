@@ -22,66 +22,74 @@ class WechatController extends Controller
                 Log::info(', content:'.$message->Content.'.');
                 # code...
                 switch ($message->Content) {
-                    case '/::)':
-                    case '/::P':
-                    case '/::D':
-                    case '/::B':
-                    case '/:,@P':
-                    case '/:,@-D':
-                    case '/::>':
-                    case '/:B-)':
+                    case '/::)'://1
+                    case '/::B'://3
+                    case '/::D'://14
+                    case '/:,@P'://21
+                    case '/:,@-D'://22
+                    case '/::>'://29
+                    case '/:handclap'://43
+                    case '/:B-)'://45
                         $id = 1;
                         # code...
                         break;
-                    case '/::(':
-                    case '/::<':
-                    case '/::T':
-                    case '/::~':
-                    case "/::'(":
-                    case "/::'|":
-                    case '/:@x':
+                    case '/::~'://2
+                    case '/::<'://6
+                    case "/::'("://10
+                    case '/::('://16
+                    case '/::T'://20
+                    case '/:,@o'://24
+                    case '/:,@!'://37
+                    case '/:!!!'://38
+                    case '/:<@'://46
+                    case '/:@>'://47
+                    case '/:P-('://50
+                    case "/::'|"://51
                         $id = 2;
                         break;
-                    case '/::@':
-                    case '/::Q':
-                    case '/::+':
-                    case '/::8':
-                    case '/:xx':
-                    case '/::|':
+                    case '/::|'://4
+                    case '/:8-)'://5
+                    case '/::$'://7
+                    case '/::P'://13
+                    case '/:--b'://18
+                    case '/::,@'://30
+                    case '/:,@@'://35
+                    case '/:&-('://44
+                    case '/::*'://53
+                    case '/:8*'://55
                         $id = 3;
                         break;
-                    case '/::$':
-                    case '/::g':
-                    case '/:?':
-                    case '/:@>':
-                    case '/:<@':
-                    case '/:--b':
-                    case '/:>-|':
-                    case '/:P-(':
+                    case '/::@'://12
+                    case '/::+'://17
+                    case '/::Q'://19
+                    case '/::-S'://32
+                    case '/::8'://36
+                    case '/:xx'://39
                         $id = 4;
                         break;
-                    case '/:8-)':
-                    case '/::X':
-                    case '/:|-)':
-                    case '/::-O':
-                    case '/::Z':
-                    case '/:,@x':
-                    case '/:,@@':
+                    case '/::X'://8
+                    case '/::Z'://9
+                    case '/:|-)'://26
+                    case '/:,@x'://34
+                    case '/::-O'://48
                         $id = 5;
                         break;
-                    case '/::O':
-                    case '/:,@o':
-                    case '/::d':
-                    case '/::!':
+                    case '/::O'://15
+                    case '/::d'://23
+                    case '/::!'://27
+                    case '/:?'://33
                         $id = 6;
                         break;
-                    case '/::L':
-                    case '/:,@f':
-                    case '/::-S':
-                    case '/:!!!':
-                    case '/:,@!':
-                    case '/:8*':
-                    case '/::,@':
+                    case '/::-|'://11
+                    case '/::g'://25
+                    case '/::L'://28
+                    case '/:,@f'://31
+                    case '/:bye'://40
+                    case '/:wipe'://41
+                    case '/:dig'://42
+                    case '/:>-|'://49
+                    case '/:X-)'://52
+                    case '/:@x'://54
                         $id = 7;
                         break;
                     default:
