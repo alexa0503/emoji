@@ -19,7 +19,7 @@ class WechatController extends Controller
 
         $server->setMessageHandler(function ($message) {
             if ($message->MsgType == 'text') {
-                return new Voice(['media_id' => 'PxJNYBNlHPMGLoVfG9ZGgudqxs0AawGKaUknf9SvSkQ']);
+                Log::info(', content:'.$message->Content'.');
                 # code...
                 switch ($message->Content) {
                     case '/::)':
