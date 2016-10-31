@@ -13,7 +13,7 @@
 
 Route::get('/', 'HomeController@index');
 Route::any('/wechat', 'WechatController@server');
-Route::any('/wechat/upload', 'WechatController@upload');
+Route::any('/wechat/upload/{id}', 'WechatController@upload');
 Route::any('/wechat/menu', 'WechatController@menu');
 
 Route::get('logout',function(){

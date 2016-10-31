@@ -101,6 +101,7 @@ class WechatController extends Controller
     public function menu()
     {
         $menu = \EasyWeChat::menu();
+        $menu->destroy();
         $buttons = [
             [
                 'type' => 'click',
@@ -128,17 +129,11 @@ class WechatController extends Controller
                 ],
             ],
         ];
-        $menu->add($buttons);
+        $result = $menu->add($buttons);
+        return $result;
     }
-    public function upload()
+    public function upload($id)
     {
-        $material = \EasyWeChat::material();
-        $lists = $material->lists('voice', 0, 10);
-        //$voice = new Voice(['media_id' => 'cZ31wNENt1bdiVf9ESuIUx7f4AtqdrO5hfrhoZ1VKvc']);
-
-        var_dump($lists);
-
-        return;
         $voices = [
             ['path' => public_path('voice/happy.mp3'), 'title' => 'happy'],
             ['path' => public_path('voice/sad.mp3'), 'title' => 'sad'],
@@ -150,14 +145,12 @@ class WechatController extends Controller
         ];
         $material = \EasyWeChat::material();
 
-        foreach ($voices as $v) {
-            $result = $material->uploadVoice($v['path']);
-            $mediaId = $result->media_id;
-            $voice = new \App\Voice();
-            $voice->media_id = $mediaId;
-            $voice->title = $v['title'];
-            $voice->save();
-        }
+        $result = $material->uploadVoice($voices[$id]['path']);
+        $mediaId = $result->media_id;
+        $voice = new \App\Voice();
+        $voice->media_id = $mediaId;
+        $voice->title = $voices[$id]['title'];
+        $voice->save();
 
         return;
     }
