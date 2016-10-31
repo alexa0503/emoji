@@ -19,7 +19,7 @@ class WechatController extends Controller
 
         $server->setMessageHandler(function ($message) {
             if ($message->MsgType == 'text') {
-                Log::info(', content:'.$message->Content'.');
+                Log::info(', content:'.$message->Content.'.');
                 # code...
                 switch ($message->Content) {
                     case '/::)':
@@ -30,7 +30,7 @@ class WechatController extends Controller
                     case '/:,@-D':
                     case '/::>':
                     case '/:B-)':
-                        return '1';
+                        $id = 1;
                         # code...
                         break;
                     case '/::(':
@@ -40,7 +40,7 @@ class WechatController extends Controller
                     case "/::'(":
                     case "/::'|":
                     case '/:@x':
-                        return '2';
+                        $id = 2;
                         break;
                     case '/::@':
                     case '/::Q':
@@ -48,7 +48,7 @@ class WechatController extends Controller
                     case '/::8':
                     case '/:xx':
                     case '/::|':
-                        return '3';
+                        $id = 3;
                         break;
                     case '/::$':
                     case '/::g':
@@ -58,7 +58,7 @@ class WechatController extends Controller
                     case '/:--b':
                     case '/:>-|':
                     case '/:P-(':
-                        return '4';
+                        $id = 4;
                         break;
                     case '/:8-)':
                     case '/::X':
@@ -67,13 +67,13 @@ class WechatController extends Controller
                     case '/::Z':
                     case '/:,@x':
                     case '/:,@@':
-                        return '5';
+                        $id = 5;
                         break;
                     case '/::O':
                     case '/:,@o':
                     case '/::d':
                     case '/::!':
-                        return '6';
+                        $id = 6;
                         break;
                     case '/::L':
                     case '/:,@f':
@@ -82,16 +82,15 @@ class WechatController extends Controller
                     case '/:,@!':
                     case '/:8*':
                     case '/::,@':
-                        return '7';
+                        $id = 7;
                         break;
                     default:
-                        return '7';
+                        $id = 7;
                         # code...
                         break;
                 }
-                //$txt = new Text(['content'=>$message->Content]);
-                //$message->Content
-                return 'no result';
+                $voice = \App\Voice::find($id);
+                return new Voice(['media_id' => $voice->media_id]);
             }
         });
         Log::info('return response.');

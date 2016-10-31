@@ -13,6 +13,7 @@ return [
      */
     'use_laravel_cache' => true,
 
+
     /*
      * 账号基本信息，请从微信公众平台/开放平台获取
      */
@@ -31,6 +32,10 @@ return [
     'log' => [
         'level' => env('WECHAT_LOG_LEVEL', 'debug'),
         'file'  => env('WECHAT_LOG_FILE', storage_path('logs/wechat.log')),
+    ],
+    'guzzle' => [
+        'timeout' => 30, // 超时时间（秒）
+        //'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
     ],
 
     /*
