@@ -7,7 +7,6 @@ use App\Helper;
 use Carbon\Carbon;
 use Log;
 use EasyWeChat\Message\Voice;
-use EasyWeChat\Message\News;
 use EasyWeChat\Message\Text;
 use EasyWeChat\Message\Material;
 
@@ -20,7 +19,7 @@ class WechatController extends Controller
 
         $server->setMessageHandler(function ($message) {
             if ($message->MsgType == 'text') {
-                return new Voice(['media_id'=>'PxJNYBNlHPMGLoVfG9ZGgudqxs0AawGKaUknf9SvSkQ']);
+                return new Voice(['media_id' => 'PxJNYBNlHPMGLoVfG9ZGgudqxs0AawGKaUknf9SvSkQ']);
                 # code...
                 switch ($message->Content) {
                     case '/::)':
@@ -99,6 +98,38 @@ class WechatController extends Controller
 
         return $server->serve();
     }
+    public function menu()
+    {
+        $menu = \EasyWeChat::menu();
+        $buttons = [
+            [
+                'type' => 'click',
+                'name' => '今日歌曲',
+                'key' => 'V1001_TODAY_MUSIC',
+            ],
+            [
+                'name' => '菜单',
+                'sub_button' => [
+                    [
+                        'type' => 'view',
+                        'name' => '搜索',
+                        'url' => 'http://www.soso.com/',
+                    ],
+                    [
+                        'type' => 'view',
+                        'name' => '视频',
+                        'url' => 'http://v.qq.com/',
+                    ],
+                    [
+                        'type' => 'click',
+                        'name' => '赞一下我们',
+                        'key' => 'V1001_GOOD',
+                    ],
+                ],
+            ],
+        ];
+        $menu->add($buttons);
+    }
     public function upload()
     {
         $material = \EasyWeChat::material();
@@ -106,19 +137,20 @@ class WechatController extends Controller
         //$voice = new Voice(['media_id' => 'cZ31wNENt1bdiVf9ESuIUx7f4AtqdrO5hfrhoZ1VKvc']);
 
         var_dump($lists);
-        return ;
+
+        return;
         $voices = [
-            ['path'=>public_path('voice/happy.mp3'),'title'=>'happy'],
-            ['path'=>public_path('voice/sad.mp3'),'title'=>'sad'],
-            ['path'=>public_path('voice/cute.mp3'),'title'=>'cute'],
-            ['path'=>public_path('voice/angry.mp3'),'title'=>'angry'],
-            ['path'=>public_path('voice/quiet.mp3'),'title'=>'quiet'],
-            ['path'=>public_path('voice/surprise.mp3'),'title'=>'surprise'],
-            ['path'=>public_path('voice/others.mp3'),'title'=>'others'],
+            ['path' => public_path('voice/happy.mp3'), 'title' => 'happy'],
+            ['path' => public_path('voice/sad.mp3'), 'title' => 'sad'],
+            ['path' => public_path('voice/cute.mp3'), 'title' => 'cute'],
+            ['path' => public_path('voice/angry.mp3'), 'title' => 'angry'],
+            ['path' => public_path('voice/quiet.mp3'), 'title' => 'quiet'],
+            ['path' => public_path('voice/surprise.mp3'), 'title' => 'surprise'],
+            ['path' => public_path('voice/others.mp3'), 'title' => 'others'],
         ];
         $material = \EasyWeChat::material();
 
-        foreach( $voices as $v){
+        foreach ($voices as $v) {
             $result = $material->uploadVoice($v['path']);
             $mediaId = $result->media_id;
             $voice = new \App\Voice();
@@ -128,7 +160,6 @@ class WechatController extends Controller
         }
 
         return;
-
     }
     public function auth(Request $request)
     {
@@ -146,7 +177,6 @@ class WechatController extends Controller
     }
     public function callback(Request $request)
     {
-
         $app_id = env('WECHAT_APPID');
         $secret = env('WECHAT_SECRET');
         $code = $request->get('code');
