@@ -15,6 +15,7 @@ Route::get('/', 'HomeController@index');
 Route::any('/wechat', 'WechatController@server');
 Route::any('/wechat/upload/{id}', 'WechatController@upload');
 Route::any('/wechat/menu', 'WechatController@menu');
+Route::any('/wechat/image', 'WechatController@image');
 
 Route::get('logout',function(){
     Request::session()->set('wechat.openid',null);

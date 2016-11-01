@@ -18,7 +18,23 @@ class WechatController extends Controller
         $server = \EasyWeChat::server();
 
         $server->setMessageHandler(function ($message) {
-            if ($message->MsgType == 'text') {
+            if ($message->MsgType == 'event') {
+                if( $message->Event == 'subscribe'){
+                    return '欢迎加入Life Space的健康空间，这里将为你介绍关于健康，关于益生菌，关于育儿的一切，开启宝宝健康的第”益”步！';
+                }
+                elseif($message->EventKey == 'LATEST_ACTIVITY'){
+                    return '敬请期待！';
+                }
+            }
+            elseif ($message->MsgType == 'text') {
+                if(preg_match('/(中国的二维码|中国的微信|二维码)/',$message->Content)){
+                    return '你好，我们是直接与Life Space澳洲公司对接的，本微信服务号主要负责Life Space品牌在中国市场的推广。感谢关注，有任何疑问欢迎给我们留言，我们会及时回复！';
+                }
+                /*
+                elseif(preg_match('/(婴儿益生菌|儿童益生菌|婴儿|儿童)/',$message->Content)){
+                    return '你好，我们是直接与Life Space澳洲公司对接的，本微信服务号主要负责Life Space品牌在中国市场的推广。感谢关注，有任何疑问欢迎给我们留言，我们会及时回复！';
+                }
+                */
                 Log::info(', content:'.$message->Content.'.');
                 # code...
                 switch ($message->Content) {
@@ -111,27 +127,45 @@ class WechatController extends Controller
         $menu->destroy();
         $buttons = [
             [
-                'type' => 'click',
-                'name' => '今日歌曲',
-                'key' => 'V1001_TODAY_MUSIC',
-            ],
-            [
-                'name' => '菜单',
+                'name' => '益生世界',
                 'sub_button' => [
                     [
                         'type' => 'view',
-                        'name' => '搜索',
-                        'url' => 'http://www.soso.com/',
+                        'name' => '益生世界',
+                        'url' => 'https://m.v.qq.com/x/page/r/w/0/r0314r7r3w0.html?ptag=v_qq_com%23v.play.adaptor%233',
                     ],
                     [
                         'type' => 'view',
-                        'name' => '视频',
-                        'url' => 'http://v.qq.com/',
+                        'name' => '益生知识',
+                        'url' => 'https://m.v.qq.com/x/page/r/w/0/r0314r7r3w0.html?ptag=v_qq_com%23v.play.adaptor%233',
                     ],
                     [
-                        'type' => 'click',
-                        'name' => '赞一下我们',
-                        'key' => 'V1001_GOOD',
+                        'type' => 'view',
+                        'name' => '益小君大家族',
+                        'url' => 'http://www.healthy-lifespace.com/cn/',
+                    ],
+                ],
+            ],
+            [
+                'name' => '益生活动',
+                'sub_button' => [
+                    [
+                        'type' => 'view',
+                        'name' => '最新活动',
+                        'url' => 'http://url.cn/414rX0h',
+                        //'type' => 'click',
+                        //'name' => '最新活动',
+                        //'key'  => 'LATEST_ACTIVITY',
+                    ],
+                ],
+            ],
+            [
+                'name' => '益起去玩',
+                'sub_button' => [
+                    [
+                        'type' => 'media_id',
+                        'name' => '哄娃魔音',
+                        'media_id'  => 'cZ31wNENt1bdiVf9ESuIU1kQjW472w4c7IDNRkPJkbU',
                     ],
                 ],
             ],
@@ -141,6 +175,7 @@ class WechatController extends Controller
     }
     public function upload($id)
     {
+        return;
         $voices = [
             ['path' => public_path('voice/happy.mp3'), 'title' => 'happy'],
             ['path' => public_path('voice/sad.mp3'), 'title' => 'sad'],
@@ -160,6 +195,14 @@ class WechatController extends Controller
         $voice->save();
 
         return;
+    }
+    public function image()
+    {
+        return;
+        $material = \EasyWeChat::material();
+        $path = public_path('images/emoji.jpg');
+        $result = $material->uploadImage($path);
+        return $result;
     }
     public function auth(Request $request)
     {
