@@ -109,12 +109,14 @@ class WechatController extends Controller
                         $id = 7;
                         break;
                     default:
-                        $id = 7;
-                        # code...
+                        return '';
                         break;
                 }
-                $voice = \App\Voice::find($id);
-                return new Voice(['media_id' => $voice->media_id]);
+                if( null != $id ){
+                    $voice = \App\Voice::find($id);
+                    return new Voice(['media_id' => $voice->media_id]);
+                }
+
             }
         });
         Log::info('return response.');
@@ -131,18 +133,18 @@ class WechatController extends Controller
                 'sub_button' => [
                     [
                         'type' => 'view',
+                        'name' => '益小君大家族',
+                        'url' => 'http://www.healthy-lifespace.com/cn/',
+                    ],
+                    [
+                        'type' => 'view',
                         'name' => '益生世界',
                         'url' => 'https://m.v.qq.com/x/page/r/w/0/r0314r7r3w0.html?ptag=v_qq_com%23v.play.adaptor%233',
                     ],
                     [
                         'type' => 'view',
-                        'name' => '益生知识',
+                        'name' => '育儿宝典',
                         'url' => 'https://m.v.qq.com/x/page/r/w/0/r0314r7r3w0.html?ptag=v_qq_com%23v.play.adaptor%233',
-                    ],
-                    [
-                        'type' => 'view',
-                        'name' => '益小君大家族',
-                        'url' => 'http://www.healthy-lifespace.com/cn/',
                     ],
                 ],
             ],
