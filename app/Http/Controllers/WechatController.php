@@ -114,7 +114,7 @@ class WechatController extends Controller
                 }
                 if( null != $id ){
                     $dt = Carbon::now();
-                    if($dt->hour >= 7 && $dt->hour < 20 ){
+                    if($dt->hour < 7 || $dt->hour >= 20 ){
                         $voice = \App\Voice::find($id);
                     }
                     else{
@@ -185,20 +185,20 @@ class WechatController extends Controller
     {
         //return;
         $voices = [
-            ['path' => public_path('voice/sleep_happy.mp3'), 'title' => 'happy'],
-            ['path' => public_path('voice/sleep_sad.mp3'), 'title' => 'sad'],
-            ['path' => public_path('voice/sleep_cute.mp3'), 'title' => 'cute'],
-            ['path' => public_path('voice/sleep_angry.mp3'), 'title' => 'angry'],
-            ['path' => public_path('voice/sleep_quiet.mp3'), 'title' => 'quiet'],
-            ['path' => public_path('voice/sleep_surprised.mp3'), 'title' => 'surprise'],
-            ['path' => public_path('voice/sleep_others.mp3'), 'title' => 'others'],
-            ['path' => public_path('voice/play_happy.mp3'), 'title' => 'happy'],
-            ['path' => public_path('voice/play_sad.mp3'), 'title' => 'sad'],
-            ['path' => public_path('voice/play_cute.mp3'), 'title' => 'cute'],
-            ['path' => public_path('voice/play_angry.mp3'), 'title' => 'angry'],
-            ['path' => public_path('voice/play_quiet.mp3'), 'title' => 'quiet'],
-            ['path' => public_path('voice/play_surprised.mp3'), 'title' => 'surprise'],
-            ['path' => public_path('voice/play_others.mp3'), 'title' => 'others'],
+            ['path' => public_path('voice/sleep_happy.mp3'), 'title' => 'sleep happy'],
+            ['path' => public_path('voice/sleep_sad.mp3'), 'title' => 'sleep sad'],
+            ['path' => public_path('voice/sleep_cute.mp3'), 'title' => 'sleep cute'],
+            ['path' => public_path('voice/sleep_angry.mp3'), 'title' => 'sleep angry'],
+            ['path' => public_path('voice/sleep_quiet.mp3'), 'title' => 'sleep quiet'],
+            ['path' => public_path('voice/sleep_surprised.mp3'), 'title' => 'sleep surprised'],
+            ['path' => public_path('voice/sleep_others.mp3'), 'title' => 'sleep others'],
+            ['path' => public_path('voice/play_happy.mp3'), 'title' => 'play happy'],
+            ['path' => public_path('voice/play_sad.mp3'), 'title' => 'play sad'],
+            ['path' => public_path('voice/play_cute.mp3'), 'title' => 'play cute'],
+            ['path' => public_path('voice/play_angry.mp3'), 'title' => 'play angry'],
+            ['path' => public_path('voice/play_quiet.mp3'), 'title' => 'play quiet'],
+            ['path' => public_path('voice/play_surprised.mp3'), 'title' => 'play surprise'],
+            ['path' => public_path('voice/play_others.mp3'), 'title' => 'play others'],
         ];
         $material = \EasyWeChat::material();
 
