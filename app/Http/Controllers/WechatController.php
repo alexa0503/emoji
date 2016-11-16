@@ -120,9 +120,13 @@ class WechatController extends Controller
                     else{
                         $voice = \App\Voice::find($id+7);
                     }
+                    $log = new \App\WechatLog();
+                    $log->openid = $message->FromUserName;
+                    $log->content = $message->Content;
+                    $log->msg_type = $message->MsgType;
+                    $log->save();
                     return new Voice(['media_id' => $voice->media_id]);
                 }
-
             }
         });
         Log::info('return response.');

@@ -18,8 +18,7 @@ class MenuMiddleware
     {
         Menu::make('adminNavbar', function($menu){
             $menu->add('控制面板',['route'=>'admin_dashboard']);
-            $menu->add('抽奖记录',['url'=>'admin/lotteries']);
-            $menu->add('查看奖品',['url'=>'admin/prizes']);
+            $menu->add('微信日志',['url'=>'admin/logs']);
             //$page->add('查看', 'page/view')->divide();
             //$menu->add('账户',['route'=>'admin_account']);
         });

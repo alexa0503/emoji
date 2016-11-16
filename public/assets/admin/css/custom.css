@@ -1,0 +1,13 @@
+/* -----------------------------------------
+   Custom.css - put your own changes here
+----------------------------------------- */
+.thumb-preview {
+    margin-bottom: 20px;
+}
+.thumb-preview img {
+    max-width: 200px;
+    max-height: 200px;
+}
+.page-content-wrapper {
+    min-height: 800px;
+}
