@@ -29,7 +29,33 @@ Route::get('login',function(){
     Request::session()->set('wechat.nickname',json_decode($wechat_user->nick_name));
     return redirect('/');
 });
+////微信分享接口
+Route::get('/wx/share', function(){
+    $url = urldecode(Request::get('url'));
 
+    $options = [
+      'app_id' => env('WECHAT_APPID'),
+      'secret' => env('WECHAT_SECRET'),
+      'token' => env('WECHAT_TOKEN')
+    ];
+    $wx = new EasyWeChat\Foundation\Application($options);
+    $js = $wx->js;
+    $js->setUrl($url);
+    $config = json_decode($js->config(array('onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ'), false), true);
+    $share = [
+      'title' => '',
+      'desc' => '',
+      'imgUrl' => asset(env('WECHAT_SHARE_IMG')),
+      'link' => '',
+    ];
+    //Access-Control-Allow-Origin
+    return response()
+        ->json(array_merge($share, $config))
+        ->withHeaders([
+            'Access-Control-Allow-Origin:*',
+        ]);
+    //return json_encode(array_merge($share, $config));
+});
 ///
 
 Route::get('/admin/login', 'Admin\AuthController@getLogin');
