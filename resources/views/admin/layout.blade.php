@@ -89,6 +89,7 @@
 <script src="{{asset('assets/admin/plugins/forms/bootstrap-filestyle/bootstrap-filestyle.js')}}"></script>
 <script src="{{asset('assets/admin/js/jquery.form.js')}}"></script>
 <script src="{{asset('assets/admin/plugins/forms/spinner/jquery.bootstrap-touchspin.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/forms/bootstrap-datepicker/bootstrap-datepicker.js')}}"></script>
 <script src="{{asset('assets/admin/js/main.js')}}"></script>
 <script src="{{asset('assets/admin/js/pages/blank.js')}}"></script>
 
@@ -105,6 +106,7 @@
             $('#userLogs').html(data);
         });
         */
+        $(".datepicker").datepicker({'format':'yyyy-mm-dd'});
         $('.side-nav .nav li ul li').each(function(){
             if( $(this).find('a').hasClass('active')){
                 $(this).parent('ul').addClass('show');

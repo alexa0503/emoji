@@ -21,7 +21,21 @@
                         <div class="panel panel-default">
                             <!-- Start .panel -->
                             <div class="panel-body">
-                                <h5>总次数:{{$count}}</h5>
+                                <div class="row">
+                                    <div class="col-md-12 col-xs-12">
+                                        <form class="form-inline" method="get" action="{{url('admin/logs')}}" enctype="application/x-www-form-urlencoded">
+                                            <div class="input-daterange input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="text" value="{{\Request::input('start')}}" class="datepicker form-control"  placeholder="选择开始日期" name="start" />
+                                                <span class="input-group-addon">-</span>
+                                                <input type="text" value="{{\Request::input('end')}}" class="datepicker form-control" placeholder="选择结束日期" name="end" />
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">搜索</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <h5>参与总次数:{{$count}}</h5>
 
                                 <div class="row">
                                     <div class="col-md-6 col-xs-12">

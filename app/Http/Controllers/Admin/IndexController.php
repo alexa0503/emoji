@@ -33,10 +33,17 @@ class IndexController extends Controller
     {
         return view('admin/dashboard');
     }
-    public function logs()
+    public function logs(Request $request)
     {
-        $logs[] = App\WechatLog::select(\DB::raw('count(*) as num, content as value'))->groupBy('content')->get();
-        $logs[] = App\WechatLog::select(\DB::raw('count(*) as num, openid as value'))->groupBy('openid')->get();
+        $query = App\WechatLog::where(\DB::raw('1'), '1');
+        if( null != $request->input('start')){
+            $query->where('created_at', '>=', urlencode($request->input('start')));
+        }
+        if( null != $request->input('end')){
+            $query->where('created_at', '<=', urlencode($request->input('end')));
+        }
+        $logs[] = $query->select(\DB::raw('count(*) as num, content as value'))->groupBy('content')->get();
+        $logs[] = $query->select(\DB::raw('count(*) as num, openid as value'))->groupBy('openid')->get();
         $count = App\WechatLog::count();
         return view('admin/logs',[
             'logs' => $logs,
