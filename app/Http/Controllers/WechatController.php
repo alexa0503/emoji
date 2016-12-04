@@ -14,7 +14,7 @@ class WechatController extends Controller
 {
     public function server()
     {
-        Log::info('request arrived.');
+        //Log::info('request arrived.');
         $server = \EasyWeChat::server();
 
         $server->setMessageHandler(function ($message) {
@@ -35,8 +35,127 @@ class WechatController extends Controller
                     return '你好，我们是直接与Life Space澳洲公司对接的，本微信服务号主要负责Life Space品牌在中国市场的推广。感谢关注，有任何疑问欢迎给我们留言，我们会及时回复！';
                 }
                 */
-                Log::info(', content:'.$message->Content.'.');
-                # code...
+                Log::info("\n\n".$message->Content."\n\n");
+                $id = null;
+                $emojis = [
+                        ['id'=>1,'value'=>'/::)'],//1
+                        ['id'=>1,'value'=>'/::B'],//3
+                        ['id'=>1,'value'=>'/::D'],//14
+                        ['id'=>1,'value'=>'/:,@P'],//21
+                        ['id'=>1,'value'=>'/:,@-D'],//22
+                        ['id'=>1,'value'=>'/::>'],//29
+                        ['id'=>1,'value'=>'/:handclap'],//43
+                        ['id'=>1,'value'=>'/:B-)'],//45
+                        ['id'=>2,'value'=>'/::~'],//2
+                        ['id'=>2,'value'=>'/::<'],//6
+                        ['id'=>2,'value'=>"/::'("],//10
+                        ['id'=>2,'value'=>'/::('],//16
+                        ['id'=>2,'value'=>'/::T'],//20
+                        ['id'=>2,'value'=>'/:,@o'],//24
+                        ['id'=>2,'value'=>'/:,@!'],//37
+                        ['id'=>2,'value'=>'/:!!!'],//38
+                        ['id'=>2,'value'=>'/:<@'],//46
+                        ['id'=>2,'value'=>'/:@>'],//47
+                        ['id'=>2,'value'=>'/:P-('],//50
+                        ['id'=>2,'value'=>"/::'|"],//51
+                        ['id'=>3,'value'=> '/::|'],//4
+                        ['id'=>3,'value'=> '/:8-)'],//5
+                        ['id'=>3,'value'=> '/::$'],//7
+                        ['id'=>3,'value'=> '/::P'],//13
+                        ['id'=>3,'value'=> '/:--b'],//18
+                        ['id'=>3,'value'=> '/::,@'],//30
+                        ['id'=>3,'value'=> '/:,@@'],//35
+                        ['id'=>3,'value'=> '/:&-('],//44
+                        ['id'=>3,'value'=> '/::*'],//53
+                        ['id'=>3,'value'=> '/:8*'],//55
+                        ['id'=>4,'value'=> '/::@'],//12
+                        ['id'=>4,'value'=> '/::+'],//17
+                        ['id'=>4,'value'=> '/::Q'],//19
+                        ['id'=>4,'value'=> '/::-S'],//32
+                        ['id'=>4,'value'=> '/::8'],//36
+                        ['id'=>4,'value'=> '/:xx'],//39
+                        ['id'=>5,'value'=> '/::X'],//8
+                        ['id'=>5,'value'=> '/::Z'],//9
+                        ['id'=>5,'value'=> '/:|-)'],//26
+                        ['id'=>5,'value'=> '/:,@x'],//34
+                        ['id'=>5,'value'=> '/::-O'],//48
+                        ['id'=>6,'value'=> '/::O'],//15
+                        ['id'=>6,'value'=> '/::d'],//23
+                        ['id'=>6,'value'=> '/::!'],//27
+                        ['id'=>6,'value'=> '/:?'],//33
+                        ['id'=>7,'value'=> '/::-|'],//11
+                        ['id'=>7,'value'=> '/::g'],//25
+                        ['id'=>7,'value'=> '/::L'],//28
+                        ['id'=>7,'value'=> '/:,@f'],//31
+                        ['id'=>7,'value'=> '/:bye'],//40
+                        ['id'=>7,'value'=> '/:wipe'],//41
+                        ['id'=>7,'value'=> '/:dig'],//42
+                        ['id'=>7,'value'=> '/:>-|'],//49
+                        ['id'=>7,'value'=> '/:X-)'],//52
+                        ['id'=>7,'value'=> '/:@x'],//54
+
+
+
+
+                        ['id'=>7,'value'=> '/:pd'],
+                        ['id'=>7,'value'=> '/:<W>'],
+                        ['id'=>7,'value'=> '/:beer'],
+                        ['id'=>7,'value'=> '/:coffee'],
+                        ['id'=>7,'value'=> '/:pig'],
+                        ['id'=>7,'value'=> '/:rose'],
+                        ['id'=>7,'value'=> '/:fade'],
+                        ['id'=>7,'value'=> '/:showlove'],
+                        ['id'=>7,'value'=> '/:heart'],
+                        ['id'=>7,'value'=> '/:break'],
+                        ['id'=>7,'value'=> '/:cake'],
+                        ['id'=>7,'value'=> '/:bome'],
+                        ['id'=>7,'value'=> '/:shit'],
+                        ['id'=>7,'value'=> '/:moon'],
+                        ['id'=>7,'value'=> '/:sun'],
+                        ['id'=>7,'value'=> '/:hug'],
+                        ['id'=>7,'value'=> '/:strong'],
+                        ['id'=>7,'value'=> '/:weak'],
+                        ['id'=>7,'value'=> '/:share'],
+                        ['id'=>7,'value'=> '/:v'],
+                        ['id'=>7,'value'=> '/:@)'],
+                        ['id'=>7,'value'=> '/:jj'],
+                        ['id'=>7,'value'=> '/:@@'],
+                        ['id'=>7,'value'=> '/:ok'],
+                        ['id'=>7,'value'=> '/:jump'],
+                        ['id'=>7,'value'=> '/:shake'],
+                        ['id'=>7,'value'=> '/:<O>'],
+                        ['id'=>7,'value'=> '/:circle'],
+                        ['id'=>7,'value'=> '😄'],
+                        ['id'=>7,'value'=> '😷'],
+                        ['id'=>7,'value'=> '😂'],
+                        ['id'=>7,'value'=> '😝'],
+                        ['id'=>7,'value'=> '😳'],
+                        ['id'=>7,'value'=> '😱'],
+                        ['id'=>7,'value'=> '😔'],
+                        ['id'=>7,'value'=> '😒'],
+                        ['id'=>7,'value'=> '[嘿哈]'],
+                        ['id'=>7,'value'=> '[捂脸]'],
+                        ['id'=>7,'value'=> '[奸笑]'],
+                        ['id'=>7,'value'=> '[机智]'],
+                        ['id'=>7,'value'=> '[皱眉]'],
+                        ['id'=>7,'value'=> '[耶]'],
+                        ['id'=>7,'value'=> '👻'],
+                        ['id'=>7,'value'=> '🙏'],
+                        ['id'=>7,'value'=> '💪'],
+                        ['id'=>7,'value'=> '🎉'],
+                        ['id'=>7,'value'=> '🎁'],
+                        ['id'=>7,'value'=> '[茶]'],
+                        ['id'=>7,'value'=> '[红包]'],
+                        ['id'=>7,'value'=> '[蜡烛]'],
+                ];
+                foreach( $emojis as $emoji){
+                    if( stripos($message->Content, $emoji['value']) === 0 ){
+                        $id = $emoji['id'];
+                        break;
+                    }
+                }
+
+                /*
                 switch ($message->Content) {
                     case '/::)'://1
                     case '/::B'://3
@@ -112,6 +231,7 @@ class WechatController extends Controller
                         return '';
                         break;
                 }
+                */
                 if( null != $id ){
                     $dt = Carbon::now();
                     if($dt->hour < 7 || $dt->hour >= 20 ){
@@ -127,9 +247,12 @@ class WechatController extends Controller
                     $log->save();
                     return new Voice(['media_id' => $voice->media_id]);
                 }
+                else{
+                    return '';
+                }
             }
         });
-        Log::info('return response.');
+        //Log::info('return response.');
 
         return $server->serve();
     }
