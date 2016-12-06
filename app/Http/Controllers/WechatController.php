@@ -235,10 +235,10 @@ class WechatController extends Controller
                 if( null != $id ){
                     $dt = Carbon::now();
                     if($dt->hour < 7 || $dt->hour >= 20 ){
-                        $voice = \App\Voice::find($id);
+                        $voice = \App\Voice::find($id+7);
                     }
                     else{
-                        $voice = \App\Voice::find($id+7);
+                        $voice = \App\Voice::find($id);
                     }
                     $log = new \App\WechatLog();
                     $log->openid = $message->FromUserName;
